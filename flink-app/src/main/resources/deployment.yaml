@@ -1,0 +1,23 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: yash-example-9
+spec:
+  image: yashflink8:latest
+  flinkVersion: v1_20
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: 2
+  serviceAccount: flink
+  jobManager:
+    resource:
+      memory: "2048m"
+      cpu: 1
+  taskManager:
+    resource:
+      memory: "2048m"
+      cpu: 1
+  job:
+    jarURI: file:///opt/flink/examples/streaming/flink-app-0.1.jar
+    entryClass: org.example.DataStreamJob
+    parallelism: 2
+    upgradeMode: stateless
